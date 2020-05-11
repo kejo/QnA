@@ -1,7 +1,37 @@
+<!DOCTYPE html>
 <html>
+<head>
+  <title>Questions And Answers</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="qna.css">
+</head>
 
-  <div id="quiz"></div>
-  <button id="submit">Submit</button>
-  <div id="results"></div>
+<body onload="loadQuestion();">
+  <div class="header"><h1>Answer the question</h1></div>
+  <div class="topnav">
+    <a href="#">Next</a>
+    <a href="#">Prev</a>
+  </div>
+
+    <div class="flex-container">
+      <div class="w3-container w3-teal"><p id="question">Test Question:</p></div>
+    </div>
+    <div class="flex-container-2">
+      <div class="w3-container answer">
+        <label for="user_answer">Answer: </label>
+        <input type="text" id="user_answer" name="user_answer">
+        <input type="hidden" id="answer" name="answer">
+      </div>
+      <div class="w3-container">
+        <button type="button" id="user_answer_submit" class="btn btn-success btn-lg" onClick="checkAnswer();">Submit</button>
+      </div>
+      <div class="w3container"><p id="result"></p></div>
+    </div>
+</body>
+
+<script src="qna.js"> </script>
 
 </html>
