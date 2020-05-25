@@ -15,22 +15,43 @@ const foo = function* () {
   };
   
 const questionGenerator = function* (){
-    let generators = [addQuestionGenerator(),tableQuestionGenerator()];
+    let generators = [
+        addQuestionGenerator(),
+        tableQuestionGenerator(),
+        subQuestionGenerator()
+    ];
     while(true){
         let m = getRndInteger(0,generators.length-1);
-        console.log("m is " + m);
         yield generators[m].next().value;
     }
 }
 const addQuestionGenerator = function* () {
     while(true){
-        let x = getRndInteger(1,1000);
-        let y = getRndInteger(1,1000);
+        let x = getRndInteger(1,100);
+        let y = getRndInteger(1,100);
         let m = getRndInteger(0,2);
         let array = [x,y,x+y];
-        let ans = x+y;
+        let ans = array[m];
         array[m] = '___';
         question = array[0] + '  +  ' + array[1] + '  =  ' + array[2];
+        console.log("question: " + question + ' Answer: ' + ans);
+        yield {question: question,answer: ans};
+    }
+}
+
+const subQuestionGenerator = function* () {
+    while(true){
+        let x= getRndInteger(1,100);
+        let y = getRndInteger(1,100);
+        let m = getRndInteger(0,2);
+        let array = new Array;
+        x > y ? array.push(x) : array.push(y);
+        x > y ? array.push(y) : array.push(x);
+        array[2]  = array[0] - array[1];
+        let ans = array[m];
+        array[m] = '___';
+
+        question = array[0] + '  -  ' + array[1] + '  =  ' + array[2];
         yield {question: question,answer: ans};
     }
 }
