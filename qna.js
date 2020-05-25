@@ -1,9 +1,9 @@
 const loadQuestion = () => {
     questionArea = document.getElementById("question");
     answerElem = document.getElementById("answer");
-    const questionGenerator = tableQuestionGenerator();
+    const question = questionGenerator();
 
-    var qna = questionGenerator.next().value;
+    var qna = question.next().value;
     //console.log(qna);
     questionArea.innerHTML = qna.question;
     answerElem.value = qna.answer;
@@ -14,9 +14,29 @@ const foo = function* () {
     yield 20;
   };
   
+const questionGenerator = function* (){
+    let generators = [addQuestionGenerator(),tableQuestionGenerator()];
+    while(true){
+        let m = getRndInteger(0,generators.length-1);
+        console.log("m is " + m);
+        yield generators[m].next().value;
+    }
+}
+const addQuestionGenerator = function* () {
+    while(true){
+        let x = getRndInteger(1,1000);
+        let y = getRndInteger(1,1000);
+        let m = getRndInteger(0,2);
+        let array = [x,y,x+y];
+        let ans = x+y;
+        array[m] = '___';
+        question = array[0] + '  +  ' + array[1] + '  =  ' + array[2];
+        yield {question: question,answer: ans};
+    }
+}
   
 const tableQuestionGenerator = function* () {
-    tables = new Array();
+    let tables = new Array();
     for (let x = 2; x < 21; x++){
         for (let y = 2; y < 10; y++){
             tables.push([x,y,x*y]);
